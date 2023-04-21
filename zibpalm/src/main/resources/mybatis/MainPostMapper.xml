@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tnsubsidiary.zibpalm.mapper.MainPostMapper">
+
+    <resultMap type="mainpost" id="mpl">
+        <id property="mpId" column="mpId"/>
+        <result property="mpsub" column="mpsub"/>
+        <result property="mpcon" column="mpcon"/>
+        <result property="mpemail" column="mpemail"/>
+        <result property="mpview" column="mpview"/>
+        <result property="mpcdate" column="mpcdate"/>
+        <result property="mpudate" column="mpudate"/>
+        <association property="login" column="email" resultMap="loginMap" />
+    </resultMap>
+
+    <resultMap type="Login" id="loginMap">
+        <id property="email" column="email" />
+        <result property="pwd" column="pwd" />
+        <result property="nickname" column="nickname" />
+        <result property="phone" column="phone" />
+        <result property="lcdate" column="lcdate" />
+        <result property="lwdate" column="lwdate" />
+        <result property="isadmin" column="isadmin" />
+    </resultMap>
+
+    <select id="mainPostGetList" resultType="list" resultMap="mpl">
+        SELECT
+            *
+        FROM
+            mainpost m
+        JOIN
+            login l
+        ON
+            m.mpemail=l.email
+        ORDER BY
+            m.mpId desc
+        FETCH next 10 rows only
+    </select>
+
+    <select id="selectBySeqM" resultType="MainPost" resultMap="mpl" parameterType="long">
+        SELECT
+            *
+        FROM
+            mainpost m
+        JOIN
+            login l
+        ON
+            m.mpemail=l.email
+        WHERE
+            m.mpId = #{mpId}
+    </select>
+
+    <update id="selectHitsUpMainPost" parameterType="long">
+        UPDATE MAINPOST SET MPVIEW=MPVIEW+1 where MPID=#{mpId}
+    </update>
+
+    <insert id="insertMainPost" parameterType="MainPost" >
+        <selectKey keyProperty="mpId" order="BEFORE" resultType="long">
+            select MPID_SEQ.nextval from dual
+        </selectKey>
+        insert into MAINPOST values(#{mpId}, #{mpsub}, #{mpcon}, #{mpemail}, 0, SYSDATE, SYSDATE)
+    </insert>
+
+    <delete id="deleteMainpost" parameterType="long">
+        delete from MAINPOST where MPID=#{mpId}
+    </delete>
+
+    <update id="updateMainPost" parameterType="Mainpost">
+        update MAINPOST set MPSUB=#{mpsub}, MPCON=#{mpcon}, MPUDATE=SYSDATE where MPID=#{mpId}
+    </update>
+</mapper>

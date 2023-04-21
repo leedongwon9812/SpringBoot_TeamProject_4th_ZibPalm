@@ -1,0 +1,106 @@
+.modal_join {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal_login {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s, 0s, transform 0.25s;
+}
+
+.show-login{
+     opacity: 1;
+     visibility: visible;
+     transform: scale(1.0);
+     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal_body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 500px;
+  padding: 40px;
+  text-align: center;
+  background-color:#2b1509;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  transform: translateX(-50%) translateY(-50%);
+}
+.join_text{
+  width : 75%;
+  height : 6%;
+  margin-bottom: 5%;
+}
+.join_button{
+  width : 25%;
+  height : 6%;
+  margin: 7%;
+  margin-top: 15%;
+  
+}
+
+.login_button{
+  width : 25%;
+  height : 6%;
+  margin: 7%;
+  margin-top: 8%;
+  cursor: pointer;
+}
+
+.cancle_button{
+  width : 25%;
+  height : 6%;
+  margin: 7%;
+  margin-top: 8%;
+  cursor: pointer;
+}
+
+.login_text{
+  width : 75%;
+  height : 6%;
+  margin-bottom: 10%;
+}
+
+.pwd_text{
+  width : 75%;
+  height : 6%;
+  margin-bottom: 10%;
+}
+
+.join_button:hover{
+  background-color: #F0EBD7;
+
+}
+
+.login_button:hover{
+  background-color: #F0EBD7;
+}
+
+.cancle_button:hover{
+  background-color: #F0EBD7;
+}
+
+.find_login{
+  color: black;
+  width: 55%;
+  margin-top: 8%;
+}
+
+.find_login:hover{
+  background-color: #F0EBD7;
+}

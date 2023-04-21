@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tnsubsidiary.zibpalm.mapper.PostMapper">
+
+    <resultMap type="post" id="postLogin">
+        <id property="postId" column="postId"/>
+        <result property="subject" column="subject"/>
+        <result property="content" column="content"/>
+        <result property="pemail" column="pemail"/>
+        <result property="pinfoId" column="pinfoId"/>
+        <result property="status" column="status"/>
+        <result property="pview" column="pview"/>
+        <result property="pcdate" column="pcdate"/>
+        <result property="pudate" column="pudate"/>
+        <association property="login" column="email" resultMap="loginMap" />
+    </resultMap>
+
+    <resultMap type="Login" id="loginMap">
+        <id property="email" column="email" />
+        <result property="pwd" column="pwd" />
+        <result property="nickname" column="nickname" />
+        <result property="phone" column="phone" />
+        <result property="lcdate" column="lcdate" />
+        <result property="lwdate" column="lwdate" />
+        <result property="isadmin" column="isadmin" />
+    </resultMap>
+
+    <resultMap type="Info" id="infoMap">
+        <id property="infoId" column="infoId" />
+        <result property="apt" column="apt" />
+        <result property="iguId" column="iguId" />
+        <result property="dong" column="dong" />
+        <result property="price" column="price" />
+        <result property="earea" column="earea" />
+        <result property="dyear" column="dyear" />
+        <result property="dmonth" column="dmonth" />
+        <association property="gu" column="guId" resultMap="guMap" />
+    </resultMap>
+
+    <resultMap type="Gu" id="guMap">
+        <id property="guId" column="guId" />
+        <result property="guname" column="guname" />
+    </resultMap>
+
+    <select id="postGetList" resultType="list" resultMap="postLogin" parameterType="Paginator">
+        SELECT
+            *
+        FROM
+            post p
+        JOIN
+            login l
+        ON
+            p.pemail=l.email
+        <if test="category == 'apt' and #{category} != null">
+            WHERE p.pinfoId!=1
+        </if>
+        <if test="category == 'else' and #{category} != null">
+            WHERE p.pinfoId=1
+        </if>
+        ORDER BY
+            p.postId DESC
+        <![CDATA[
+        OFFSET
+            (#{currentPage}-1)*#{pageSize} rows
+        FETCH next #{pageSize} rows only
+        ]]>
+    </select>
+
+    <select id="postGetMyList" resultType="list" resultMap="postLogin" parameterType="Paginator">
+        <![CDATA[
+        SELECT
+            *
+        FROM
+            post p
+        JOIN
+            login l
+        ON
+            p.pemail=l.email
+        WHERE
+            p.pemail=#{myEmail}
+        ORDER BY
+            p.postId DESC
+        OFFSET
+            (#{currentPage}-1)*#{pageSize} rows
+        FETCH next #{pageSize} rows only
+        ]]>
+    </select>
+
+    <select id="checkIsAdmin" resultType="String" parameterType="String">
+        SELECT ISADMIN FROM LOGIN WHERE EMAIL=#{email}
+    </select>
+
+    <select id="getTotalCount" resultType="long">
+        SELECT COUNT(*) FROM POST
+    </select>
+
+    <select id="getTotalAPTCount" resultType="long">
+        SELECT COUNT(*) FROM POST WHERE PINFOID!=1
+    </select>
+
+    <select id="getTotalMyCount" resultType="long" parameterType="String">
+        SELECT COUNT(*) FROM POST WHERE PEMAIL=#{email}
+    </select>
+
+    <select id="selectBySeq" resultType="Post" resultMap="postLogin" parameterType="long">
+        <![CDATA[
+        SELECT
+            *
+        FROM
+            post p
+        JOIN
+            login l
+        ON
+            p.pemail=l.email
+        WHERE
+            p.postId = #{postId}
+        ]]>
+    </select>
+
+    <update id="selectHitsUpdatePost" parameterType="long">
+        UPDATE POST SET PVIEW = PVIEW+1 where POSTID=#{postId}
+    </update>
+
+    <select id="getSelectInfo" resultType="list" resultMap="infoMap">
+        <![CDATA[
+        SELECT
+            *
+        FROM
+            INFO i
+        JOIN
+            GU g
+        ON
+            i.IGUID=g.GUID
+        WHERE
+            i.infoId !=1
+        AND
+            i.infoId !=2
+        ORDER BY
+            g.guname
+        ]]>
+    </select>
+
+    <select id="getInfoBySeq" resultType="Info" resultMap="infoMap" parameterType="long">
+        <![CDATA[
+        SELECT
+            *
+        FROM
+            INFO i
+        JOIN
+            GU g
+        ON
+            i.IGUID=g.GUID
+        WHERE
+            i.INFOID = #{pinfoId}
+        ]]>
+    </select>
+
+    <select id="searchGetList" resultType="list" resultMap="postLogin" parameterType="Paginator">
+        SELECT
+            *
+        FROM
+            post p
+        JOIN
+            login l
+        ON
+            p.pemail=l.email
+        <where>
+            <if test="category == 'apt' and #{category} != null">
+                p.pinfoId!=1
+            </if>
+            <if test="category == 'else' and #{category} != null">
+                p.pinfoId=1
+            </if>
+            <if test="searchOption != null">
+                AND ${searchOption} LIKE '%'||#{searchWord}||'%'
+            </if>
+        </where>
+        <![CDATA[
+        ORDER BY
+            p.postId DESC
+        OFFSET
+            (#{currentPage}-1)*#{pageSize} rows
+        FETCH next
+            #{pageSize} rows only
+        ]]>
+    </select>
+
+    <select id="getModifiedTotalCount" resultType="long" parameterType="Paginator">
+        SELECT
+            COUNT(*)
+        FROM
+            POST p
+        JOIN
+            LOGIN l
+        ON
+            p.PEMAIL=l.EMAIL
+        <if test="searchOption != null">
+            WHERE ${searchOption} LIKE '%'||#{searchWord}||'%'
+        </if>
+    </select>
+
+    <select id="getSearchInfo" resultType="list" resultMap="infoMap" parameterType="String">
+        SELECT
+            *
+        FROM
+            info i
+        JOIN
+            gu g
+        ON
+            i.iguId=g.guId
+        WHERE
+            i.infoId !=1
+        AND
+            i.infoId !=2
+        AND
+            (i.dong LIKE '%'||#{text}||'%'
+            OR i.apt LIKE '%'||#{text}||'%'
+            OR g.guname LIKE '%'||#{text}||'%')
+        ORDER BY
+            g.guname, i.dyear DESC, i.dmonth DESC
+    </select>
+
+    <select id="getSearchInfoAuto" resultType="list" resultMap="infoMap" parameterType="String">
+        SELECT
+            *
+        FROM
+            info i
+        JOIN
+            gu g
+        ON
+            i.iguId=g.guId
+        WHERE
+            i.infoId !=1
+        AND
+            i.infoId !=2
+        AND
+            (i.dong LIKE '%'||#{text}||'%'
+            OR i.apt LIKE '%'||#{text}||'%'
+            OR g.guname LIKE '%'||#{text}||'%')
+        ORDER BY
+            g.guname, i.dyear DESC, i.dmonth DESC
+    </select>
+
+    <insert id="insertPost" parameterType="Post" >
+        <selectKey keyProperty="postId" order="BEFORE" resultType="long">
+            select POSTID_SEQ.nextval from dual
+        </selectKey>
+        insert into POST values(#{postId}, #{subject}, #{content}, #{pemail}, #{pinfoId}, '판매중', 0, SYSDATE, SYSDATE)
+    </insert>
+
+    <delete id="deletePost" parameterType="long">
+        delete from POST where POSTID=#{postId}
+    </delete>
+
+    <update id="updatePost" parameterType="Post">
+        update Post set SUBJECT=#{subject}, CONTENT=#{content}, STATUS=#{status}, PINFOID=#{pinfoId}, PUDATE=SYSDATE where POSTID=#{postId}
+    </update>
+</mapper>

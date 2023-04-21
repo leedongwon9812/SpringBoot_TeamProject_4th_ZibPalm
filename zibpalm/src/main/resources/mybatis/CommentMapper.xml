@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tnsubsidiary.zibpalm.mapper.CommentMapper">
+    <resultMap type="fcomment" id="fcLogin">
+        <id property="fcId" column="fcId"/>
+        <result property="fccomment" column="fccomment"/>
+        <result property="fcpostId" column="fcpostId"/>
+        <result property="fcemail" column="fcemail"/>
+        <result property="fccdate" column="fccdate"/>
+        <result property="fcudate" column="fcudate"/>
+        <association property="login" column="email" resultMap="loginMap" />
+    </resultMap>
+
+    <resultMap type="scomment" id="scLogin">
+        <id property="scId" column="scId"/>
+        <result property="sccomment" column="sccomment"/>
+        <result property="scfcId" column="scfcId"/>
+        <result property="scemail" column="scemail"/>
+        <result property="sccdate" column="sccdate"/>
+        <result property="scudate" column="scudate"/>
+        <association property="login" column="email" resultMap="loginMap" />
+    </resultMap>
+
+    <resultMap type="Login" id="loginMap">
+        <id property="email" column="email" />
+        <result property="pwd" column="pwd" />
+        <result property="nickname" column="nickname" />
+        <result property="phone" column="phone" />
+        <result property="lcdate" column="lcdate" />
+        <result property="lwdate" column="lwdate" />
+    </resultMap>
+
+    <select id="getTotalCountFC" resultType="long" parameterType="Long">
+        SELECT COUNT(*) FROM FCOMMENT WHERE
+            FCPOSTID=#{postId}
+    </select>
+
+    <select id="fcommentGetList" resultType="list" resultMap="fcLogin" parameterType="Hashmap">
+        SELECT
+            f.fcId, l.nickname, f.fcemail, f.fccomment, f.fccdate
+        FROM
+            fcomment f
+        JOIN
+            login l
+        ON
+            f.fcemail=l.email
+        WHERE
+            f.fcpostId=#{postId}
+        ORDER BY
+            f.fccdate DESC
+        <![CDATA[
+        OFFSET
+            (#{paginator.fcurrentPage}-1)*#{paginator.fpageSize} rows
+        FETCH next #{paginator.fpageSize} rows only
+        ]]>
+    </select>
+
+    <insert id="insertFcomment" parameterType="Fcomment">
+        <selectKey keyProperty="fcId" order="BEFORE" resultType="long">
+            select FCID_SEQ.nextval from dual
+        </selectKey>
+        insert into FCOMMENT values(#{fcId}, #{fccomment}, #{fcpostId}, #{fcemail}, SYSDATE)
+    </insert>
+
+    <delete id="deleteFcomment" parameterType="long">
+        delete from FCOMMENT where FCID=#{fcId}
+    </delete>
+
+    <select id="scommentGetList" resultType="list" resultMap="scLogin" parameterType="long">
+        SELECT
+            s.scId, l.nickname, s.scemail, s.sccomment, s.sccdate
+        FROM
+            scomment s
+        JOIN
+            login l
+        ON
+            s.scemail=l.email
+        WHERE
+            s.scfcId=#{fcId}
+        ORDER BY
+            s.sccdate DESC
+    </select>
+
+    <insert id="insertScomment" parameterType="Scomment">
+        <selectKey keyProperty="scId" order="BEFORE" resultType="long">
+            select SCID_SEQ.nextval from dual
+        </selectKey>
+        insert into SCOMMENT values(#{scId}, #{sccomment}, #{scfcId}, #{scemail}, SYSDATE)
+    </insert>
+
+    <delete id="deleteScomment" parameterType="long">
+        delete from SCOMMENT where SCID=#{scId}
+    </delete>
+</mapper>

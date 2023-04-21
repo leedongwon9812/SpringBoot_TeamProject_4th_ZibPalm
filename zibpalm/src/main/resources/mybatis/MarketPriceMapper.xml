@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tnsubsidiary.zibpalm.mapper.MarketPriceMapper">
+    <resultMap type="Info" id="infoGu">
+        <id property="infoId" column="infoId"/>
+        <result property="iguId" column="iguId"/>
+        <result property="dong" column="dong"/>
+        <result property="apt" column="apt"/>
+        <result property="earea" column="earea"/>
+        <result property="dyear" column="dyear"/>
+        <result property="dmonth" column="dmonth"/>
+        <result property="price" column="price"/>
+        <association property="gu" column="guId" resultMap="guMap"/>
+    </resultMap>
+    <resultMap type="Gu" id="guMap">
+        <id property="guId" column="guId" />
+        <result property="guname" column="guname" />
+    </resultMap>
+
+    <select id="getGuname" resultType="Gu">
+        select * from GU order by GUNAME
+    </select>
+
+    <select id="getGuId" resultType="long" parameterType="String">
+        select GUID from GU WHERE GUNAME=#{guname}
+    </select>
+
+    <select id="getInfoList" resultType="Info" parameterType="String">
+        select distinct DONG from INFO where IGUID=#{guid}
+    </select>
+    <select id="guidSelectList" resultType="Info" parameterType="java.util.HashMap" resultMap="infoGu">
+        <![CDATA[
+        select * from INFO i join GU g on i.IGUID=g.GUID where IGUID=#{guid} order by DONG, APT, EAREA, DYEAR desc, DMONTH desc
+        OFFSET
+        (#{paginator.currentPage}-1)*#{paginator.pageSize} rows
+        FETCH next #{paginator.pageSize} rows only
+        ]]>
+    </select>
+    <select id="getAptList" resultType="Info" parameterType="java.util.HashMap">
+        select distinct APT from INFO where IGUID=#{guid} and DONG=#{dong}
+    </select>
+    <select id="dongSelectList" resultType="Info" parameterType="java.util.HashMap" resultMap="infoGu">
+        <![CDATA[
+        select * from INFO i join GU g on i.IGUID=g.GUID where IGUID=#{guid} and DONG=#{dong} order by APT, EAREA, DYEAR desc, DMONTH desc
+        OFFSET
+        (#{paginator.currentPage}-1)*#{paginator.pageSize} rows
+        FETCH next #{paginator.pageSize} rows only
+        ]]>
+    </select>
+    <select id="getEareaList" resultType="Info" parameterType="java.util.HashMap">
+        select distinct EAREA from INFO where IGUID=#{guid} and DONG=#{dong} and APT=#{apt}
+    </select>
+    <select id="aptSelectList" resultType="Info" parameterType="java.util.HashMap" resultMap="infoGu">
+        <![CDATA[
+        select * from INFO i join GU g on i.IGUID=g.GUID where IGUID=#{guid} and DONG=#{dong} and APT=#{apt} order by EAREA, DYEAR desc, DMONTH desc
+        OFFSET
+        (#{paginator.currentPage}-1)*#{paginator.pageSize} rows
+        FETCH next #{paginator.pageSize} rows only
+        ]]>
+    </select>
+    <select id="getPriceList" resultType="Info" parameterType="java.util.HashMap" resultMap="infoGu">
+        <![CDATA[
+        select * from INFO i join GU g on i.IGUID=g.GUID where IGUID=#{guid} and DONG=#{dong} and APT=#{apt} and EAREA=#{earea} order by DYEAR desc, DMONTH desc
+        OFFSET
+        (#{paginator.currentPage}-1)*#{paginator.pageSize} rows
+        FETCH next #{paginator.pageSize} rows only
+        ]]>
+    </select>
+    <select id="searchList" resultType="Info" parameterType="java.util.HashMap" resultMap="infoGu">
+        <![CDATA[
+        select * from INFO i join GU g on i.IGUID=g.GUID where ${searchBox} like '%'||#{searchText}||'%' order by i.IGUID, i.DONG, i.APT, i.EAREA, i.DYEAR desc, i.DMONTH desc
+        OFFSET
+        (#{paginator.currentPage}-1)*#{paginator.pageSize} rows
+        FETCH next #{paginator.pageSize} rows only
+        ]]>
+    </select>
+
+    <select id="getTotalCount" resultType="long" parameterType="String">
+        select COUNT(*) from INFO where IGUID=#{guid}
+    </select>
+    <select id="getTotalCountDong" resultType="long" parameterType="java.util.HashMap">
+        select COUNT(*) from INFO where IGUID=#{guid} and Dong=#{dong}
+    </select>
+    <select id="getTotalCountApt" resultType="long" parameterType="java.util.HashMap">
+        select COUNT(*) from INFO where IGUID=#{guid} and Dong=#{dong} and APT=#{apt}
+    </select>
+    <select id="getTotalCountEarea" resultType="long" parameterType="java.util.HashMap">
+        select COUNT(*) from INFO where IGUID=#{guid} and Dong=#{dong} and APT=#{apt} and EAREA=#{earea}
+    </select>
+    <select id="getTotalCountSearch" resultType="long" parameterType="java.util.HashMap">
+        select COUNT(*) from INFO i join GU g on i.IGUID=g.GUID where ${searchBox} like '%'||#{searchText}||'%'
+    </select>
+    <select id="getListByKeyword" resultType="String" parameterType="String">
+        select distinct APT from INFO where APT like '%'||#{keyword}||'%'
+    </select>
+    <select id="getDongListByKeyword" resultType="String" parameterType="String">
+        select distinct DONG from INFO where DONG like '%'||#{keyword}||'%'
+    </select>
+    <select id="getGunameListByKeyword" resultType="String" parameterType="String">
+        select GUNAME from GU where GUNAME like '%'||#{keyword}||'%'
+    </select>
+</mapper>

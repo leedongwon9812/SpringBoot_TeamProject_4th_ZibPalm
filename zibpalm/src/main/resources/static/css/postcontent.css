@@ -1,0 +1,497 @@
+/* 게시물 전체 틀 */
+.postcontent-body{
+    position: relative;
+    width: 860px;
+    margin: 0 auto 10rem auto;
+    font-size: 12px;
+    padding: 29px 29px 0;
+    border: 1px solid #ebecef;
+    border-radius: 6px;
+}
+
+
+/* 게시물 최상단 버튼들 */
+.postcontent-topbutton{
+    position: relative;
+    margin: 10rem auto 1rem auto;
+    height: 35px;
+    width: 860px;
+    padding-bottom: 10px;
+}
+
+.left-topbutton{
+    display:inline-flex;
+    float:left;
+    width: 150px;
+    justify-content:space-between;
+}
+
+.right-topbutton{
+    float:right;
+}
+
+.postcontent-topbutton button{
+     background: #6ebe41;
+     color:#333333;
+     font-weight:bold;
+     width: 60px;
+     height: 32px;
+     border-radius: 5px;
+     font-size: 13px;
+     border: none;
+     cursor: pointer;
+}
+
+.postcontent-topbutton button:hover{
+    background-color: #ccad88;
+}
+
+/* 게시물 상단 부분 */
+.postcontent-header{
+    position: relative;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.postcontent-header-main{
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.postcontent-header-main a{
+    color: #333333;
+    font-weight: bold;
+    text-decoration:none;
+}
+
+.postcontent-header-main a:hover{
+    text-underline-position: under;
+    text-decoration:underline;
+}
+
+
+/* 게시물 헤더 제목 부분 */
+.postcontent-header-title{
+    margin-top: 7px;
+}
+
+.postcontent-title-strong{
+    float:left;
+    margin: auto 10px;
+    border-radius: 7px;
+}
+
+
+.postcontent-title-strong strong{
+    background-color: #ffe3e4;
+    color: #f85635;
+    display: inline-block;
+    width: 36px;
+    height: 24px;
+    font-size: 12px;
+    line-height: 25px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-align: center;
+}
+
+.postcontent-title{
+    font-weight: 400;
+    font-size: 26px;
+    color: #333333;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+
+/* 게시물 헤더 작성자 부분 */
+.postcontent-header-writer{
+    display: inline-flex;
+    flex-direction: column;
+}
+.header-writer-profile{
+    display: block;
+    float: left;
+}
+
+.writer-profile{
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.writer-profile strong{
+    color: #666666;
+    display: inline-block;
+    width: 36px;
+    height: 24px;
+    font-size: 12px;
+    line-height: 25px;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-align: center;
+    margin: auto 10px;
+}
+.writer-profile p{
+    color: #333333;
+}
+
+.header-article-profile{
+    display:flex;
+    margin-top:5px;
+    font-size: 12px;
+    line-height: 13px;
+    color: #c3a4a4;
+}
+
+.article-profile-date span{
+    margin-right: 10px;
+}
+
+.article-profile-count{
+    display:flex;
+}
+
+
+/* 게시물 상태 */
+.postcontent-header-status{
+    float:right;
+}
+
+
+/* 게시물 메인 내용 부분 */
+.postcontent-main{
+    position: relative;
+    margin: 20px auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ebecef;
+    border-top: 1px solid #ebecef;
+}
+
+.postcontent-main-info{
+    text-align: center;
+    font-size: 12px;
+    color: #333333;
+    margin-bottom: 50px;
+}
+
+.postcontent-main-info table{
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+    width: 60%;
+    word-wrap: break-word;
+    word-break: break-word;
+    font-size: 14px;
+}
+
+.postcontent-main-info td{
+    height: 40px;
+}
+
+.postcontent-main-info strong{
+    color: #333333;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 25px;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-align: center;
+    margin: 7px 10px;
+    border: 1px solid #ebecef;
+    width:100%;
+}
+
+.info-td{
+    width:30%;
+}
+
+.info-content{
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    padding: 2px;
+}
+
+.info-content p{
+    margin: auto 10px;
+}
+
+
+/* 게시물 댓글 리스트 부분 */
+.postcontent-comment{
+    margin-top: -17px;
+}
+
+.postcontent-comment-option{
+    padding-top: 16px;
+    margin-bottom: 11px;
+}
+
+.comment_title{
+    margin-top: 3px;
+    margin-right: 12px;
+    font-size: 17px;
+}
+
+.comment_tab_list{
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 13px;
+    vertical-align: top;
+    list-style:none;
+}
+
+.comment_tab_item{
+    float: left;
+    margin-left: 0;
+}
+
+.comment_tab_item:last-child{
+    margin-left: 8px;
+}
+
+.comment_tab_button{
+    text-decoration:none;
+    color: #b7b7b7;
+    font-weight: 700;
+}
+
+.comment_refresh_button{
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background: none;
+    width: 23px;
+    height: 23px;
+    margin-left: 8px;
+    background-image: url(https://ca-fe.pstatic.net/web-pc/static/img/ico-post-refresh.svg?f332c2e8d26157445fa480d35d5b0ef4);
+    vertical-align: top;
+}
+
+.comment-list{
+    margin: 0;
+    padding: 0;
+    padding-bottom: 16px;
+    list-style:none;
+}
+
+
+.commentItem{
+    position: relative;
+    border-top: 1px solid #ebecef;
+}
+
+.commentItem:first-child{
+    border-top: 0;
+}
+
+.commentItem:last-child{
+    border-bottom: 0;
+}
+
+.comment_area{
+    position: relative;
+    display:flex;
+    padding: 12px 23px 10px 0;
+}
+
+.comment_area img{
+    vertical-align: top;
+}
+
+.comment_box{
+    padding-left: 46px;
+    width:100%;
+}
+
+.comment_nick_info {
+    margin-bottom: 4px;
+    display: inline-block;
+    position: relative;
+    font-size: 13px;
+    vertical-align: top;
+}
+
+.comment_text_box {
+    position: relative;
+    font-size: 13px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.comment_text_view {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.text_comment {
+    line-height: 17px;
+    word-break: break-all;
+    word-wrap: break-word;
+    vertical-align: top;
+}
+
+.comment_info_box {
+    margin-top: 7px;
+    font-size: 12px;
+    color: #979797;
+}
+
+.comment_info_date {
+    margin-right: 8px;
+}
+
+.comment_info_button{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.comment_delete_button{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+
+/* 대댓글 리스트 */
+.commentItem-reply{
+    margin-left:25px;
+}
+
+/* 대댓글 입력창 */
+.commentItem-re{
+    position: relative;
+    border-top: 1px solid #ebecef;
+    padding-left: 46px;
+}
+
+.comment_inbox_number-re{
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    color: #b7b7b7;
+}
+
+.inbox_count-re{
+    font-weight: 400;
+}
+
+
+/* 댓글 입력창 */
+.commentWriter {
+    margin: 12px 0 29px;
+    padding: 16px 10px 5px 18px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+.comment-inbox {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.comment-blind{
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+.comment-nickname {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 13px;
+    font-style: normal;
+}
+
+.comment-text{
+    display: block;
+    width: 100%;
+    height: 18px;
+    min-height: 17px;
+    max-height: 500px;
+    padding-right: 1px;
+    border: 0;
+    font-size: 13px;
+    resize: none;
+    box-sizing: border-box;
+    background: transparent;
+    color: #000000;
+    outline: 0;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+
+.comment_inbox_number {
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    color: #b7b7b7;
+}
+
+.inbox_count {
+    font-weight: 400;
+}
+
+.comment_attach{
+    position: relative;
+    margin-bottom: 0;
+}
+
+.comment_attach:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.register_box{
+    float: right;
+}
+
+.comment-register{
+    display: inline-block;
+    min-width: 46px;
+    height: 34px;
+    line-height: 36px;
+    font-size: 13px;
+    color: #b7b7b7;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: top;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.comment-cancle{
+    display: inline-block;
+    min-width: 46px;
+    height: 34px;
+    line-height: 36px;
+    font-size: 13px;
+    color: #b7b7b7;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: top;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 0;
+    margin-right: 5px;
+}

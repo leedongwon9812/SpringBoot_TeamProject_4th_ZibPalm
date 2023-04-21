@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tnsubsidiary.zibpalm.mapper.JoinMapper">
+
+    <insert id="insertKey" parameterType="Login">
+        insert into LOGIN values(#{email}, #{pwd}, #{nickname}, #{phone}, SYSDATE, null, null)
+    </insert>
+
+    <select id="checkEmail" resultType="int" parameterType="String">
+        select COUNT(*) from login where email = #{email}
+    </select>
+    <select id="checkNick" resultType="int" parameterType="String">
+        select COUNT(*) from login where nickname = #{nickname}
+    </select>
+    <select id="checkPhone" resultType="int" parameterType="String">
+        select COUNT(*) from login where phone = #{phone}
+    </select>
+
+    <insert id="insertAdmin" parameterType="Login">
+        insert into LOGIN values(#{email}, #{pwd}, #{nickname}, #{phone}, SYSDATE, null, 'admin')
+    </insert>
+
+    <delete id="deleteUser" parameterType="String">
+        delete from LOGIN where EMAIL=#{email}
+    </delete>
+
+    <update id="updateUser" parameterType="Login">
+        update LOGIN set NICKNAME=#{nickname}, PHONE=#{phone} where EMAIL=#{email}
+    </update>
+</mapper>

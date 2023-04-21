@@ -1,0 +1,216 @@
+/* 글작성 */
+.postwrite-body{
+    position: relative;
+    width: 860px;
+    margin: 10rem auto;
+    font-size: 13px;
+    padding: 29px 29px 0;
+    border: 1px solid #ebecef;
+    border-radius: 6px;
+}
+
+
+/* 글작성 제목, 등록버튼 */
+.postwrite-header{
+    position: relative;
+    display: inline-block;
+    width:100%;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ebecef;
+}
+
+.postwrite-title{
+    margin-bottom: 16px;
+    font-size: 22px;
+    color: #000000;
+    float:left;
+}
+
+.postwrite-apply{
+    border-radius: 6px;
+    border: none;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-align: center;
+    float:right;
+    background: #6ebe41;
+    color:#333333;
+    min-width: 55px;
+    height: 36px;
+    padding: 0 12px;
+    font-size: 13px;
+    line-height: 36px;
+    text-decoration: none;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.postwrite-apply:hover{
+    background-color: #ccad88;
+}
+
+/* 글작성 메인창 */
+.postwrite-main{
+    position: relative;
+    margin: 20px auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* INFO 옵션 선택, 검색 */
+.postwrite-checkInfo{
+    position: relative;
+    display: flex;
+    float: left;
+    width: 100%;
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkInfo{
+    width:40%;
+}
+
+.searchInfo{
+    width: 55%;
+    text-align:right;
+}
+
+.select-checkInfo {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    outline: 0;
+    width:100%;
+    background: #ffe699;
+    font-size: 13px;
+    font-weight: bold;
+    color:#333333;
+    border: 1px solid #ebecef;
+    padding: 10px;
+    border-radius: 9px;
+}
+
+.postwrite-checkInfo input[type="text"]{
+    height:30px;
+    font-size: 13px;
+    padding-left:5px;
+    width:80%;
+}
+
+.postwrite-checkInfo button{
+    background: #6ebe41;
+    color:#333333;
+    font-weight:bold;
+    border: none;
+    width: 60px;
+    height: 32px;
+    margin-left:10px;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.postwrite-checkInfo button:hover{
+    background-color: #ccad88;
+}
+
+/* 제목 입력 부분 */
+.postwrite-subject{
+    margin-top:12px;
+    margin-bottom:12px;
+}
+.textarea_subject{
+    display: block;
+    width: 100%;
+    min-height: 40px;
+    padding: 11px 12px 10px;
+    border: 1px solid #ebecef;
+    box-sizing: border-box;
+    overflow: hidden;
+    resize: none;
+    word-break: break-all;
+    font-size: 13px;
+    letter-spacing: -.23px;
+    line-height: 17px;
+    outline: none;
+}
+
+/* 매물정보 받아서 뿌려주는 곳 */
+.setInfoTab table{
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+    width: 60%;
+    word-wrap: break-word;
+    word-break: break-word;
+    font-size: 13px;
+}
+
+.setInfoTab td{
+    height: 40px;
+}
+
+.setInfoTab strong{
+    color: #333333;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 25px;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-align: center;
+    margin: 7px 10px;
+    border: 1px solid #ebecef;
+    width:100%;
+}
+
+.info-td{
+    width:30%;
+}
+
+.info-addr{
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    padding: 2px;
+}
+
+.info-addr p{
+    margin: auto 10px;
+}
+
+
+
+/* Update용 css */
+.postupdate-status{
+    position: relative;
+    display: flex;
+    float: left;
+    margin-bottom: 10px;
+    width: 40%;
+}
+
+.select-status {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    outline: 0;
+    width: 100%;
+    background: #ffe699;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333333;
+    border: 1px solid #ebecef;
+    padding: 10px;
+    border-radius: 9px;
+}
+
+
+.ui-autocomplete{
+    max-height: 400px;
+    overflow-y: auto; /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
+* html .ui-autocomplete{
+    height: 400px;
+}
